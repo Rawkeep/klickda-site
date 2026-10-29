@@ -1,5 +1,3 @@
 User-agent: *
 Allow: /
-# Nach Domain-Entscheid: Sitemap-Zeile ergänzen
-
 Sitemap: https://rawkeep.github.io/klickda-site/sitemap.xml

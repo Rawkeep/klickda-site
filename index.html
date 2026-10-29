@@ -60,7 +60,7 @@
       <p class="held-neben"><a href="#produkt">Oder erst ansehen, wie ein Klick aussieht ↓</a></p>
       <ul class="vertrauen" aria-label="Das zeichnet Klickda aus">
         <li>Läuft lokal auf dem Arbeitsplatz — keine Cloud, keine fremden Server, 0 externe Requests</li>
-        <li>Drei Konnektoren heute: SAP OData V2, Business Central, Dataverse — ein Kern, ein Paket je Kunde, mehrere Benutzer je Installation</li>
+        <li>Drei Konnektoren heute: SAP OData V2, Business Central, Dataverse — ein Kern, ein Paket je Kunde, mehrere Benutzer je Installation, Anmeldung mit dem Microsoft-Konto des Hauses</li>
         <li>Jeder Schreibvorgang ist ein benanntes Kommando: Vorbedingung, ETag, Protokoll, Rückgängig</li>
         <li>Übergabe-Paket inklusive — Sie dürfen jederzeit gehen und alles mitnehmen</li>
       </ul>
@@ -154,12 +154,13 @@
     <h2 data-reveal>Stand der Entwicklung</h2>
     <p class="abschnitt-intro" data-reveal>Klickda wird offen gebaut: jede Version mit Tests gegen nachgebaute Gateways und einer Abnahme im echten Browser. Was hier steht, läuft.</p>
     <dl class="stand" data-reveal>
+      <div><dt>0.6.0 · Oktober 2026</dt><dd>Anmeldung mit dem Microsoft-Konto des Hauses (Entra ID, OpenID Connect mit PKCE, Token selbst geprüft) — Rollen aus Entra oder aus der eigenen Benutzerliste, nie aus dem Token geraten. Erstes Pilot-Paket „Exportversand" für SAP: Heute fällig, ohne Spediteur, Gefahrgut; Freigeben, Sperren, Spediteur, Plan-Warenausgang, und „Versand vorbereiten" als ein Klick für zwei Felder. Dazu der Pilotplan: zwei Wochen lesen, dann ein Feld, dann der Alltag. 100 Tests.</dd></div>
       <div><dt>0.5.0 · Oktober 2026</dt><dd>Abläufe: ein Klick, mehrere Kommandos, auch über Systeme hinweg — jeder Schritt geprüft, Rückgängig in umgekehrter Reihenfolge. Mehrere Benutzer je Installation mit Anmeldung und Rolle je Person. Prozess lesen: ein bestehendes Prozessmodell einlesen, Vorschläge und Entwurf erhalten, Probelauf gegen die eigenen Daten, Paket schreiben — in einem Schritt. 89 Tests.</dd></div>
       <div><dt>0.4.0 · Oktober 2026</dt><dd>Assistent: erklärt Konflikte aus vorher und jetzt, findet im Protokoll wiederholte Klicks und schreibt daraus Regel-Entwürfe fürs Paket — ohne Sprachmodell. Freie Fragen an ein lokales Modell über Ollama, höchstens ein geprüfter Vorschlag je Antwort, ausgeführt nur durch Klick. 76 Tests.</dd></div>
       <div><dt>0.3.0 · Oktober 2026</dt><dd>Lizenzschlüssel nach dem Verfahren des Werks, mit Mandant und Ablauf — und der Regel, dass eine Lizenz nur den Rückweg stoppt, nie Lesen, Protokoll oder Übergabe. Delta-Lesen für Business Central und Dataverse: nur, was sich seit dem letzten Lauf geändert hat. 69 Tests.</dd></div>
       <div><dt>0.2.0 · Oktober 2026</dt><dd>Dritter Konnektor Dataverse. Eingabemaske für Kommandos mit Werten. Tagesbericht: erledigt, wer, Regel-Läufe, offene Vorschläge und Konflikte. 60 Tests, Browser-Abnahme über drei Bereiche.</dd></div>
       <div><dt>0.1.0 · Oktober 2026</dt><dd>Kern mit Kommandos, Spiegel, Outbox, hash-verkettetem Protokoll und Rückgängig. Konnektoren SAP OData V2 und Business Central. Workflow-Pakete je Kunde, Rollen, Regeln mit Freigabe, Übergabe-Paket.</dd></div>
-      <div><dt>Als Nächstes</dt><dd>Erster Pilot mit eigenem Workflow-Paket. SSO für die Anmeldung. Offen gegen die echte Sandbox: der Statuscode von Business Central bei fremdem ETag.</dd></div>
+      <div><dt>Als Nächstes</dt><dd>Der Pilot selbst: sechs Wochen mit einem Versand und seiner IT, nach dem Plan in der Doku. Offen gegen die echte Sandbox: der Statuscode von Business Central bei fremdem ETag, und das Datumsformat des PATCH im echten SAP-Gateway.</dd></div>
     </dl>
   </section>
 
