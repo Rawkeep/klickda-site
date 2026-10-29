@@ -1,0 +1,15 @@
+# Rawkeep Go-Live-Kit — Security-Header für statische Seiten
+# (Cloudflare Pages/Workers Assets und Netlify lesen diese Datei direkt;
+#  bei eigenem Server: dieselben Header in nginx/Express setzen.)
+#
+# CSP passt zum Hausstil: alles self, Inline-Styles erlaubt (Design-Kit),
+# keine externen Quellen. Bei Bedarf gezielt erweitern — nie pauschal öffnen.
+
+/*
+  Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'none'
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Cross-Origin-Opener-Policy: same-origin

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+# Nach Domain-Entscheid: Sitemap-Zeile ergänzen

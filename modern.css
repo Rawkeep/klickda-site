@@ -1,0 +1,219 @@
+/* Rawkeep Design-Kit — modern.css (2026)
+   ──────────────────────────────────────────────────────────────────────
+   Was heutige Browser können und wir bisher liegen ließen. Alles hier ist
+   **Progressive Enhancement**: Fehlt ein Feature, sieht die Seite aus wie
+   vorher — nichts bricht. Und alles ist nativ: 0 KB Bibliothek, 0 CDN.
+
+   Nach effects.css einbinden:
+     <link rel="stylesheet" href="effects.css">
+     <link rel="stylesheet" href="modern.css">
+
+   Die vier großen Gewinne:
+   1. Scroll-Animationen OHNE JavaScript (animation-timeline) — läuft auf
+      dem Compositor, also flüssig auch auf schwachen Geräten.
+   2. Dark Mode ab Werk (light-dark()) — eine Zeile statt zwei Paletten.
+   3. Weiche Seitenwechsel (View Transitions) — auch ohne Framework.
+   4. Typografie, die sich selbst umbricht (text-wrap: balance/pretty).
+────────────────────────────────────────────────────────────────────── */
+
+/* ── 0. Farbraum: OKLCH statt HEX ──────────────────────────────────────
+   OKLCH ist wahrnehmungsgleich: gleiche Lightness = gleich hell für das
+   Auge. Damit lassen sich Paletten rechnerisch ableiten, ohne dass eine
+   Stufe „schmutzig" wirkt — bei HEX/HSL passiert genau das.
+   Die Marken-Variablen bleiben; hier entstehen nur Ableitungen daraus. */
+@supports (color: oklch(0.5 0.1 250)) {
+  :root {
+    /* Aufhellen/Abdunkeln ohne Farbstich — Basis für Hover, Ränder, Flächen */
+    --kit-akzent-hell: color-mix(in oklch, var(--kit-akzent, #888) 55%, white);
+    --kit-akzent-dunkel: color-mix(in oklch, var(--kit-akzent, #888) 80%, black);
+    --kit-akzent-zart: color-mix(in oklch, var(--kit-akzent, #888) 12%, transparent);
+  }
+}
+
+/* ── 1. Dark Mode ab Werk ──────────────────────────────────────────────
+   light-dark() liefert beide Werte in EINER Deklaration. Voraussetzung ist
+   `color-scheme` — das schaltet auch Formularfelder, Scrollbalken und
+   Auswahlfarben des Browsers mit um (das vergessen die meisten). */
+@supports (color: light-dark(white, black)) {
+  :root {
+    color-scheme: light dark;
+    --kit-flaeche-auto: light-dark(var(--kit-flaeche, #faf7f2), oklch(0.18 0.01 260));
+    --kit-tinte-auto: light-dark(oklch(0.25 0.02 260), oklch(0.94 0.01 260));
+    --kit-karte-auto: light-dark(white, oklch(0.23 0.012 260));
+    --kit-linie-auto: light-dark(oklch(0.9 0.01 60), oklch(0.32 0.012 260));
+  }
+  /* Opt-in: Klasse ans <html>, dann übernehmen die Flächen den Auto-Wert.
+     Bewusst NICHT global erzwungen — bestehende Seiten bleiben unberührt. */
+  html.auto-theme body {
+    background: var(--kit-flaeche-auto);
+    color: var(--kit-tinte-auto);
+  }
+  html.auto-theme .karte { background: var(--kit-karte-auto); border-color: var(--kit-linie-auto); }
+}
+
+/* ── 2. Scroll-Animationen ohne JavaScript ─────────────────────────────
+   `animation-timeline: view()` koppelt eine Animation an die Sichtbarkeit
+   des Elements. Der Browser rechnet das auf dem Compositor — kein
+   IntersectionObserver, kein Scroll-Listener, kein Ruckeln.
+   Fallback: Ohne Unterstützung greift weiter effects.js (data-reveal). */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Einblenden beim Hereinscrollen — übernimmt data-reveal von effects.js.
+       Gleiches Attribut, andere Technik: bestehende Seiten profitieren
+       sofort, ohne dass eine Zeile HTML geändert werden muss. */
+    [data-reveal] {
+      animation: kit-auftauchen linear both;
+      animation-timeline: view();
+      /* Start, wenn 15 % unterhalb der Kante; fertig bei 40 % Sichtbarkeit */
+      animation-range: entry 15% cover 40%;
+    }
+    /* data-delay staffelt weiterhin — nativ über einen späteren Startpunkt */
+    [data-reveal][data-delay="1"] { animation-range: entry 22% cover 46%; }
+    [data-reveal][data-delay="2"] { animation-range: entry 29% cover 52%; }
+
+    /* Parallax ohne JS: Ebene wandert langsamer als der Scroll */
+    .parallax-buehne > [data-parallax] {
+      animation: kit-parallax linear both;
+      animation-timeline: view();
+      animation-range: cover;
+    }
+
+    /* Lesefortschritt am Seitenkopf — eine Zeile statt eines Skripts */
+    [data-fortschritt] {
+      transform-origin: 0 50%;
+      animation: kit-fortschritt linear both;
+      animation-timeline: scroll(root block);
+    }
+
+    /* Sticky-Szene: Element bleibt stehen und skaliert sanft mit */
+    [data-buehne] {
+      animation: kit-buehne linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+  }
+}
+
+@keyframes kit-auftauchen {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes kit-parallax {
+  from { transform: translateY(-8%); }
+  to { transform: translateY(8%); }
+}
+@keyframes kit-fortschritt {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes kit-buehne {
+  from { opacity: 0; transform: scale(0.96); }
+  20%, 80% { opacity: 1; transform: none; }
+  to { opacity: 0.35; transform: scale(0.98); }
+}
+
+/* ── 3. Weiche Seitenwechsel (View Transitions für klassische Seiten) ───
+   Gilt für ganz normale Links zwischen HTML-Seiten — kein Framework, kein
+   Router. Browser ohne Unterstützung springen wie immer hart um. */
+@view-transition { navigation: auto; }
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) { animation: kit-raus .18s ease both; }
+  ::view-transition-new(root) { animation: kit-rein .28s ease both; }
+}
+@keyframes kit-raus { to { opacity: 0; } }
+@keyframes kit-rein { from { opacity: 0; transform: translateY(8px); } }
+
+/* Elemente, die über Seiten hinweg „mitwandern" sollen (Logo, Held-Bild):
+   gleicher Name auf beiden Seiten ⇒ der Browser morpht sie ineinander. */
+.marke { view-transition-name: marke; }
+
+/* ── 4. Typografie, die sich selbst umbricht ───────────────────────────
+   `balance` verteilt Überschriften gleichmäßig auf die Zeilen (max. ~6),
+   `pretty` verhindert Schusterjungen im Fließtext. Kostenlos, sofort
+   sichtbar — der billigste Qualitätsgewinn überhaupt. */
+h1, h2, h3, .held h1, blockquote { text-wrap: balance; }
+p, li, figcaption, .abschnitt-intro { text-wrap: pretty; }
+
+/* Fließende Schriftgrößen ohne Media-Queries.
+   clamp(Minimum, Wunsch, Maximum) — skaliert stufenlos mit dem Viewport. */
+:root {
+  --kit-h1: clamp(2rem, 1.4rem + 3vw, 3.4rem);
+  --kit-h2: clamp(1.35rem, 1.1rem + 1.2vw, 1.9rem);
+  --kit-text: clamp(1rem, 0.97rem + 0.15vw, 1.12rem);
+}
+.held h1, .fluid h1 { font-size: var(--kit-h1); line-height: 1.12; }
+.fluid h2 { font-size: var(--kit-h2); }
+.fluid { font-size: var(--kit-text); }
+
+/* ── 5. Container Queries — Komponenten statt Seiten denken ────────────
+   Eine Karte weiß nicht, wie breit das Fenster ist — sie soll wissen, wie
+   viel Platz SIE hat. Dadurch funktioniert dieselbe Karte in Sidebar und
+   Hauptspalte, ohne Sonderfälle. */
+@supports (container-type: inline-size) {
+  .karten, .preis-raster, .kpi-raster { container-type: inline-size; }
+
+  @container (min-width: 34rem) {
+    .karte.breit { display: grid; grid-template-columns: auto 1fr; gap: 1rem; }
+  }
+  @container (max-width: 22rem) {
+    .karte { padding: 14px 16px; }
+    .karte h3 { font-size: 1rem; }
+  }
+}
+
+/* ── 6. Sanftes Erscheinen für Dialoge und Popover ─────────────────────
+   @starting-style beschreibt den Zustand VOR dem ersten Frame; zusammen
+   mit `transition-behavior: allow-discrete` lassen sich damit Elemente
+   animieren, die von display:none kommen — bisher nur mit JS möglich. */
+@supports (transition-behavior: allow-discrete) {
+  [popover], dialog {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity .2s ease, transform .2s ease, overlay .2s allow-discrete,
+      display .2s allow-discrete;
+  }
+  [popover]:popover-open, dialog[open] { opacity: 1; transform: none; }
+  @starting-style {
+    [popover]:popover-open, dialog[open] { opacity: 0; transform: translateY(6px); }
+  }
+}
+
+/* ── 7. Formularfelder, die mitwachsen ─────────────────────────────────
+   `field-sizing: content` lässt Textareas mit dem Inhalt wachsen —
+   der klassische „Textarea-Resize per JS" entfällt komplett. */
+@supports (field-sizing: content) {
+  textarea.waechst { field-sizing: content; min-height: 3lh; max-height: 12lh; }
+}
+
+/* ── 8. :has() — der Eltern-Selektor ───────────────────────────────────
+   Erlaubt Regeln, für die bisher eine JS-Klasse nötig war. */
+@supports selector(:has(*)) {
+  /* Karte mit Bild bekommt engeren Innenabstand oben */
+  .karte:has(> img:first-child) { padding-top: 0; overflow: hidden; }
+  /* Formular mit Fehlermeldung hebt sich ab */
+  form:has(.formular-meldung[data-art="fehler"]) { outline: 2px solid #c5221f; outline-offset: 4px; }
+  /* Menü offen ⇒ Seite nicht scrollen (ohne JS-Klasse am body) */
+  body:has(.nav-schalter[aria-expanded="true"]) { overflow: hidden; }
+}
+
+/* ── 9. Rendering-Performance für lange Seiten ─────────────────────────
+   `content-visibility: auto` überspringt das Rendern von Bereichen weit
+   außerhalb des Sichtfelds. contain-intrinsic-size verhindert dabei
+   Sprünge in der Scrollleiste. */
+@supports (content-visibility: auto) {
+  .abschnitt-lazy { content-visibility: auto; contain-intrinsic-size: auto 600px; }
+}
+
+/* ── 10. Fokus, der niemandem wehtut ───────────────────────────────────
+   :focus-visible zeigt den Rahmen nur bei Tastaturbedienung — Mausklicks
+   bleiben ruhig, Tastaturnutzer sehen trotzdem immer, wo sie sind. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid var(--kit-akzent, #1d4ed8);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Bilder verhalten sich vernünftig, ohne dass man daran denken muss. */
+:where(img, video, svg) { max-inline-size: 100%; block-size: auto; }
+:where(img[loading="lazy"]) { background: var(--kit-akzent-zart, transparent); }

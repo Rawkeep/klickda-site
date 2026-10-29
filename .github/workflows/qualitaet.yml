@@ -1,0 +1,42 @@
+# Rawkeep Go-Live-Kit — Qualitäts-Wächter als GitHub Action.
+# Nach .github/workflows/qualitaet.yml kopieren und PFAD anpassen.
+#
+# Prüft bei jedem PR und einmal im Monat (Cron):
+#   1. Lighthouse-Budget (Performance/SEO/Accessibility ≥ 90)
+#   2. Tote Links
+# Rot = Merge blockiert bzw. Issue im Monatslauf — Erosion fällt sofort auf.
+
+name: Qualität
+
+on:
+  pull_request:
+  schedule:
+    - cron: "0 6 1 * *"  # monatlich am 1. um 6:00 UTC
+  workflow_dispatch:
+
+env:
+  PFAD: "."  # Ordner der Seite, z. B. "demos/maison-mara"
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Statischen Server starten
+        run: (cd "$PFAD" && python3 -m http.server 8080 &) && sleep 2
+      - name: Lighthouse-Budget prüfen
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: http://localhost:8080/
+          uploadArtifacts: true
+          configPath: .github/lighthouserc.json  # assertions: min 0.9 je Kategorie
+
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tote Links finden
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --no-progress --include-fragments "$PFAD/**/*.html"
+          fail: true

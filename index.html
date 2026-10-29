@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Klickda — Ein Klick. Da.</title>
+  <meta name="description" content="Klickda liest Ihre SAP- und Business-Central-Daten lokal, zeigt, was heute fällig ist, und erledigt es mit einem Klick — geprüft, protokolliert, rückgängig machbar. Mit Übergabe-Paket: Sie dürfen gehen.">
+  <meta property="og:title" content="Klickda — Ein Klick. Da.">
+  <meta property="og:description" content="Dashboards zeigen Arbeit. Klickda erledigt sie — per OData zurück ins SAP oder Business Central, geprüft und rückgängig machbar. Kein Lock-in.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="effects.css">
+  <link rel="stylesheet" href="modern.css">
+  <link rel="stylesheet" href="styles.css">
+  <noscript><style>[data-reveal] { opacity: 1 !important; transform: none !important; }</style></noscript>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Klickda",
+    "url": "https://klickda.example/",
+    "description": "Arbeits-Cockpit mit OData-Rückweg für SAP und Microsoft Dynamics 365 Business Central.",
+    "inLanguage": "de"
+  }
+  </script>
+</head>
+<body>
+<a class="skip" href="#produkt">Zum Inhalt springen</a>
+
+<header class="kopf" data-nav-shrink>
+  <div class="zeile">
+    <a class="marke" href="#start" aria-label="Klickda — zur Startseite"><svg class="icon icon-marke" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="currentColor"/><path d="M9 17l5 5 9-11" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Klickda</a>
+    <nav aria-label="Hauptnavigation" class="nav" id="nav">
+      <a href="#produkt">Produkt</a>
+      <a href="#sicherheit">Sicherheit</a>
+      <a href="#automatisierung">Automatisierung</a>
+      <a href="#wege">Kein Lock-in</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a class="knopf knopf-primaer kopf-cta" href="#kontakt">Pilot anfragen</a>
+    <button class="nav-schalter" aria-expanded="false" aria-controls="nav" id="navSchalter">
+      <span class="sr-only">Menü öffnen</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="start">
+
+  <section class="held parallax-buehne bg-glow">
+    <div class="bg-punkte" data-parallax="0.25" aria-hidden="true"></div>
+    <div class="inhalt">
+      <p class="held-ueberzeile">Arbeits-Cockpit für SAP und Business Central</p>
+      <h1>Dashboards zeigen Arbeit.<br>Klickda erledigt sie.</h1>
+      <p class="held-text">Klickda liest Ihre Geschäftsdaten per OData auf den Arbeitsplatz, zeigt, was heute fällig ist, und schreibt den Arbeitsschritt mit einem Klick zurück ins System — geprüft, protokolliert, rückgängig machbar. Kein Wechsel in die ERP-Maske, kein Schatten-Excel.</p>
+      <p class="held-aktion">
+        <a class="knopf knopf-primaer knopf-gross" href="#kontakt"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Pilot anfragen</a>
+      </p>
+      <p class="held-neben"><a href="#produkt">Oder erst ansehen, wie ein Klick aussieht ↓</a></p>
+      <ul class="vertrauen" aria-label="Das zeichnet Klickda aus">
+        <li>Läuft lokal auf dem Arbeitsplatz — keine Cloud, keine fremden Server, 0 externe Requests</li>
+        <li>Jeder Schreibvorgang ist ein benanntes Kommando: Vorbedingung, ETag, Protokoll, Rückgängig</li>
+        <li>Übergabe-Paket inklusive — Sie dürfen jederzeit gehen und alles mitnehmen</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="abschnitt" id="produkt">
+    <h2 data-reveal>So sieht ein Klick aus</h2>
+    <p class="abschnitt-intro" data-reveal>Eine gesperrte Lieferung, ein Knopf „Sperre aufheben", ein Protokolleintrag — und ein „Rückgängig", das die alte Sperre wieder setzt. Keine Nachfrage, kein Formular.</p>
+    <figure class="bild" data-reveal>
+      <img src="klickda-cockpit.png" width="1280" height="860" alt="Klickda-Oberfläche: Liste gesperrter Lieferungen mit Mandant-Chip, Sichten, Suche und je Zeile dem Knopf „Sperre aufheben"; unten ein Hinweis „Lieferung 80000009: Liefersperre aufheben — erledigt" mit Rückgängig-Knopf." loading="lazy">
+      <figcaption>Echter Stand aus der automatischen Abnahme gegen ein nachgebautes SAP-Gateway: Mandant immer sichtbar, ein primärer Knopf je Zeile, Rückgängig statt Bestätigungsdialog.</figcaption>
+    </figure>
+    <div class="stufen">
+      <article class="karte lift stufe" data-reveal>
+        <span class="stufe-nr" aria-hidden="true">1</span>
+        <h3>Daten ziehen</h3>
+        <p>Der Konnektor liest die Entität per OData seitenweise in einen lokalen Spiegel. Jeder Satz trägt Mandant, Rohsatz und den letzten Lesezeitpunkt. Nichts verlässt das Haus.</p>
+      </article>
+      <article class="karte lift stufe" data-reveal data-delay="1">
+        <span class="stufe-nr" aria-hidden="true">2</span>
+        <h3>In der App nutzen</h3>
+        <p>Sichten, Spalten und Suche kommen aus dem Workflow-Paket Ihres Hauses. Die Liste zeigt, was anliegt — ohne das ERP mit jeder Abfrage zu belasten.</p>
+      </article>
+      <article class="karte lift stufe" data-reveal data-delay="2">
+        <span class="stufe-nr" aria-hidden="true">3</span>
+        <h3>An den echten Ablauf anbinden</h3>
+        <p>Jeder Arbeitsschritt ist ein Kommando mit Vorbedingung, Änderung und Gegenkommando. Der Klick ist die Bestätigung, das Protokoll die Quittung.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="abschnitt abschnitt-hell" id="sicherheit">
+    <h2 data-reveal>Sicherheit, die eine IT-Abteilung freigibt</h2>
+    <p class="abschnitt-intro" data-reveal>Schreiben ins ERP ist Vertrauenssache. Deshalb kann Klickda weniger als ein Makro — und genau das ist der Punkt.</p>
+    <div class="karten karten-sechs">
+      <article class="karte" data-reveal><h3>Kommando statt Formular</h3><p>Es gibt keinen freien Schreibzugriff aus der Oberfläche. Nur ein registriertes Kommando geht hinaus, und nur, wenn seine Vorbedingung auf dem frisch gelesenen Satz gilt.</p></article>
+      <article class="karte" data-reveal data-delay="1"><h3>Konflikt statt Überschreiben</h3><p>Geschrieben wird mit dem ETag des frischen Satzes. Hat jemand dazwischen geändert, zeigt Klickda vorher und jetzt — und schreibt nichts. Nie „Last Write Wins".</p></article>
+      <article class="karte" data-reveal data-delay="2"><h3>Doppelklick ist kein Doppelbuchen</h3><p>Ein deterministischer Idempotenzschlüssel aus Kommando, Satz und Ausgangsstand macht den zweiten Klick wirkungslos — auch bei Netzabbruch und Wiederholung.</p></article>
+      <article class="karte" data-reveal><h3>Protokoll, das niemand kürzt</h3><p>Jeder Schritt steht hash-verkettet im Protokoll: eingereiht, erledigt, Konflikt, verworfen, rückgängig. Eine nachträgliche Änderung fällt auf.</p></article>
+      <article class="karte" data-reveal data-delay="1"><h3>Rollen und Mandanten</h3><p>Lesen, bearbeiten, verwalten — ein Kommando trägt die nötige Rolle, der Server weist ab und protokolliert. Der Mandant steht in jeder Abfrage, nicht nur in der Anzeige.</p></article>
+      <article class="karte" data-reveal data-delay="2"><h3>Nur lesend, bis Sie es öffnen</h3><p>Die ersten Wochen laufen rein lesend. Der Rückweg kommt mit einem Feld, einer eigenen Rolle im Zielsystem und dem Protokoll auf dem Tisch der IT — bevor der erste echte Klick fällt.</p></article>
+    </div>
+  </section>
+
+  <section class="abschnitt" id="automatisierung">
+    <h2 data-reveal>Automatisierung ab dem ersten Tag — über denselben Weg</h2>
+    <p class="abschnitt-intro" data-reveal>Eine Regel findet, was zu tun ist. Ein Mensch gibt frei. Beides läuft durch dieselbe Prüfung wie der Klick.</p>
+    <ol class="ablauf" data-reveal>
+      <li><strong>Regel</strong> — ein Filter über Ihren Daten plus ein Kommando, zum Beispiel: Kreditsperren älter als 30 Tage zur Freigabe vorschlagen.</li>
+      <li><strong>Vorschlag</strong> — die Regel schreibt nichts. Sie legt Vorschläge an, jeder mit dem Grund, warum er dasteht.</li>
+      <li><strong>Freigabe</strong> — einzeln oder alle auf einmal, mit Ihrer Rolle und Ihrem Namen im Protokoll. Erst dann wird es ein Kommando.</li>
+      <li><strong>Ausführen ohne Klick</strong> — wenn Sie es wollen: nur mit Verwaltungsrolle, mit Obergrenze je Lauf, und jede Ausführung bleibt rückgängig machbar.</li>
+    </ol>
+  </section>
+
+  <section class="abschnitt abschnitt-hell" id="wege">
+    <h2 data-reveal>Kein Lock-in: drei Wege, alle gleichwertig</h2>
+    <p class="abschnitt-intro" data-reveal>Was Klickda für Sie automatisiert, gehört Ihnen. Sie entscheiden, wo es langfristig läuft.</p>
+    <div class="karten">
+      <article class="karte lift" data-reveal>
+        <h3>Bleiben</h3>
+        <p>Klickda als Arbeitsplatz-Lizenz, Ihre Workflow-Pakete gepflegt vom Werk. Kündbar zum Monatsende.</p>
+      </article>
+      <article class="karte lift" data-reveal data-delay="1">
+        <h3>Übergeben</h3>
+        <p>Je Automatisierung ein Übergabe-Paket: Prozessmodell für n8n, BPMN und Power Automate, Spezifikation mit dem Code jeder Bedingung, Ihr Protokoll als CSV. Nachbau im eigenen System — sukzessive, nach Rücksprache, durch Sie oder durch das Werk.</p>
+      </article>
+      <article class="karte lift" data-reveal data-delay="2">
+        <h3>Eigenes bauen</h3>
+        <p>Eigene Software, konzipiert und gebaut nach Architektur-Briefing. Klickda ist die Brücke, bis sie steht.</p>
+      </article>
+    </div>
+    <p class="hinweis-klein" data-reveal>Das Übergabe-Paket ist immer verfügbar — ein Knopf in der Oberfläche, keine Rücksprache nötig. Preise je Arbeitsplatz, Konnektor und Übergabe auf Anfrage.</p>
+  </section>
+
+  <section class="abschnitt" id="konnektoren">
+    <h2 data-reveal>Konnektoren</h2>
+    <div class="konnektoren" data-reveal>
+      <div class="konnektor"><h3>SAP S/4HANA, OData V2</h3><p>CSRF-Token und Sitzungs-Cookie aus dem Einzel-GET, ETag als If-Match, Folgeseiten sauber über den Proxy. Gegen ein nachgebautes Gateway mit genau diesen Kanten getestet.</p></div>
+      <div class="konnektor"><h3>Dynamics 365 Business Central, API v2.0</h3><p>OAuth über Entra-App, Company-Auflösung, GUID-Schlüssel, If-Match als Pflicht. Eigener Fake, eigener Durchstich.</p></div>
+      <div class="konnektor"><h3>OData V4, generisch</h3><p>Die Basis für Dataverse und jedes weitere System, das OData spricht. Ein Vertrag, ein Adapter je System, nie ein Umbau des Kerns.</p></div>
+    </div>
+  </section>
+
+  <section class="abschnitt abschnitt-hell" id="ueber">
+    <h2 data-reveal>Wer dahintersteht</h2>
+    <p data-reveal>Klickda entsteht im Raum Köln, gebaut von einem Wirtschaftsinformatiker und Ingenieur mit Jahren in Export, Logistik und SAP-Anbindung — aus dem Ärger darüber, dass ein BI-Werkzeug das Problem zeigt und die Lösung sechs Klicks entfernt in einer anderen Maske liegt. Rawkeep baut lokal-first, ohne Cloud-Zwang, mit deterministischen Prüfungen statt Versprechen.</p>
+    <p data-reveal class="hinweis-klein">Der Name Klickda ist ein Arbeitstitel; die Markenprüfung läuft.</p>
+  </section>
+
+  <section class="abschnitt" id="kontakt">
+    <h2 data-reveal>Pilot anfragen</h2>
+    <div class="kontakt-raster">
+      <div data-reveal>
+        <p>Ein Pilot beginnt mit einem Bereich, einer Sicht und einem Feld: zwei Wochen lesend, dann der erste Rückweg mit eigener Rolle im Zielsystem. Sie brauchen dafür einen Ansprechpartner im Fachbereich und einen in der IT.</p>
+        <address>
+          Rawkeep · Klickda<br>
+          [Straße Hausnummer] · [PLZ] Raum Köln
+        </address>
+      </div>
+      <form class="formular" data-schutz action="mailto:[E-Mail eintragen]" method="post" enctype="text/plain" data-reveal>
+        <h3>Nachricht schreiben</h3>
+        <label for="fName">Ihr Name</label>
+        <input id="fName" name="name" type="text" autocomplete="name" required>
+        <label for="fFirma">Unternehmen und System (SAP, Business Central, anderes)</label>
+        <input id="fFirma" name="firma" type="text" autocomplete="organization" required>
+        <label for="fMail">E-Mail für die Antwort</label>
+        <input id="fMail" name="email" type="email" autocomplete="email" required>
+        <label for="fMsg">Welcher Arbeitsschritt kostet Sie heute die meisten Klicks?</label>
+        <textarea id="fMsg" name="nachricht" rows="4"></textarea>
+        <button class="knopf knopf-sekundaer" type="submit">Nachricht senden</button>
+        <p class="hinweis-klein">Öffnet Ihr E-Mail-Programm — keine Daten an Dritte, kein Tracking auf dieser Seite.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="fuss">
+  <p>© <span id="jahr">2026</span> Rawkeep · Raum Köln</p>
+  <p><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
+  <p class="hinweis-klein">Lokal-first, 0 externe Requests, keine Cookies.</p>
+</footer>
+
+<script src="main.js"></script>
+<script src="effects.js" defer></script>
+<script src="formular-schutz.js" defer></script>
+</body>
+</html>

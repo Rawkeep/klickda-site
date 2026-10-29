@@ -1,0 +1,204 @@
+/* Klickda — generiert von der Rawkeep Kundenseiten-Fabrik.
+   Design-Tokens aus dem Branchen-Profil; mobile-first, AA-Kontraste,
+   Touch-Ziele ≥ 44 px, Systemschriften, prefers-reduced-motion respektiert. */
+
+:root {
+  --flaeche: #f5f7fa;
+  --karte: #ffffff;
+  --tinte: #262b30;
+  --grau: #5b636d;
+  --linie: color-mix(in srgb, var(--akzent) 12%, #e6e4df);
+  --akzent: #3949ab;
+  --akzent-dunkel: #2c3a8c;
+  --weich: color-mix(in srgb, var(--akzent) 10%, var(--flaeche));
+  --fokus: #1d4ed8;
+  --kit-akzent: var(--akzent);
+  --kit-flaeche: var(--flaeche);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--flaeche); color: var(--tinte);
+  font: 17px/1.7 -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+}
+h1, h2, .marke { font-family: inherit; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+.skip {
+  position: absolute; left: -999px; top: 0; background: var(--akzent);
+  color: #fff; padding: 10px 16px; z-index: 20;
+}
+.skip:focus { left: 8px; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--fokus); outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
+
+/* Icons: Inline-SVG statt Emoji (Werksregel) — Groesse folgt der Schrift,
+   Farbe folgt currentColor, damit sie in jedem Theme sitzen. */
+.icon { width: 1em; height: 1em; flex: none; vertical-align: -0.125em; margin-right: .45em; }
+.knopf { display: inline-flex; align-items: center; }
+
+/* Haken der Vertrauensliste als CSS-Icon: so ueberlebt er, wenn jemand
+   den Platzhaltertext ueberschreibt, und zaehlt nicht als Emoji. */
+.vertrauen li { list-style: none; padding-left: 1.6em; position: relative; }
+.vertrauen li::before {
+  content: ""; position: absolute; left: 0; top: .2em; width: 1.1em; height: 1.1em;
+  background: currentColor;
+  -webkit-mask: var(--haken) center/contain no-repeat;
+          mask: var(--haken) center/contain no-repeat;
+}
+:root { --haken: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E"); }
+
+/* Sprungziele nicht unter den klebenden Kopf schieben: ohne das landet
+   die Ueberschrift beim Klick auf einen Anker hinter der Leiste und der
+   Besucher faengt mitten im Absatz zu lesen an. */
+:target, main[id], section[id], [id]:where(h1, h2, h3) { scroll-margin-top: 5rem; }
+
+/* Kopf */
+.kopf {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--flaeche) 96%, transparent);
+  border-bottom: 1px solid var(--linie); backdrop-filter: blur(4px);
+}
+.zeile {
+  max-width: 1020px; margin: 0 auto; padding: 10px 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.marke { color: var(--tinte); text-decoration: none; font-size: 1.1rem; margin-right: auto; }
+.nav { display: none; gap: 4px; }
+.nav a {
+  color: var(--tinte); text-decoration: none; padding: 10px 12px;
+  border-radius: 8px; min-height: 44px; display: inline-flex; align-items: center;
+}
+.nav a:hover { background: var(--weich); }
+.nav-schalter {
+  border: 1px solid var(--linie); background: var(--karte); border-radius: 8px;
+  font-size: 1.3rem; width: 44px; height: 44px; cursor: pointer;
+}
+.nav.offen { display: flex; flex-direction: column; position: absolute;
+  right: 12px; top: 60px; background: var(--karte); border: 1px solid var(--linie);
+  border-radius: 12px; padding: 8px; box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+
+/* Sprach-Umschalter (nur bei mehrsprachigen Seiten eingesetzt) */
+.sprachen { display: flex; gap: 4px; }
+.sprachen button {
+  min-width: 44px; min-height: 44px; border-radius: 8px; cursor: pointer;
+  border: 1px solid var(--linie); background: var(--karte); color: var(--tinte);
+  font: inherit; font-size: .9rem;
+}
+.sprachen button[aria-pressed="true"] { background: var(--akzent); color: #fff; }
+
+/* Knöpfe */
+.knopf {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 10px 22px; border-radius: 999px;
+  text-decoration: none; font-weight: 600; border: none; cursor: pointer;
+  font-size: 1rem;
+}
+.knopf-primaer { background: var(--akzent); color: #fff; }
+.knopf-primaer:hover { background: var(--akzent-dunkel); }
+.knopf-sekundaer { background: var(--weich); color: var(--tinte); }
+.knopf-gross { font-size: 1.08rem; padding: 14px 26px; }
+.kopf-cta { display: none; }
+
+/* Hero */
+.held { text-align: center; padding: 48px 16px 32px; }
+.held .inhalt { max-width: 980px; margin: 0 auto; }
+.held h1 { font-size: 2.2rem; line-height: 1.2; margin: 0 0 .6rem; }
+.held-text { max-width: 36rem; margin: 0 auto 1.4rem; color: var(--grau); }
+.held-aktion { margin: 0 0 .5rem; }
+.held-neben a { color: var(--akzent-dunkel); }
+.vertrauen {
+  list-style: none; padding: 0; margin: 1.6rem 0 0;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+}
+.vertrauen li {
+  background: var(--karte); border: 1px solid var(--linie);
+  border-radius: 999px; padding: 8px 16px; font-size: .95rem;
+}
+
+/* Abschnitte */
+.abschnitt { max-width: 1020px; margin: 0 auto; padding: 36px 16px; }
+.abschnitt h2 { font-size: 1.5rem; margin: 0 0 .4rem; color: var(--akzent-dunkel); }
+.abschnitt-intro { color: var(--grau); margin-top: 0; }
+
+.karten { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 18px; }
+.karte {
+  background: var(--karte); border: 1px solid var(--linie);
+  border-radius: 14px; padding: 20px 22px;
+}
+.karte h3 { margin: 0 0 .4rem; font-size: 1.05rem; }
+.karte p { margin: 0; color: var(--grau); }
+
+/* Tabellen */
+.preise, .zeiten { width: 100%; border-collapse: collapse; margin-top: 12px; }
+.preise th, .preise td, .zeiten th, .zeiten td {
+  text-align: left; padding: 12px 8px; border-bottom: 1px solid var(--linie);
+}
+.preise td, .zeiten td { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.preise th, .zeiten th { font-weight: 500; }
+.hinweis-klein { color: var(--grau); font-size: .9rem; }
+
+/* Kontakt */
+.kontakt-raster { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 16px; }
+address { font-style: normal; margin: 12px 0; }
+.formular {
+  background: var(--karte); border: 1px solid var(--linie);
+  border-radius: 14px; padding: 20px;
+}
+.formular h3 { margin-top: 0; }
+.formular label { display: block; margin: 12px 0 4px; font-weight: 500; }
+.formular input, .formular textarea {
+  width: 100%; padding: 12px; font: inherit; border: 1px solid var(--grau);
+  border-radius: 8px; background: #fff; color: var(--tinte); min-height: 44px;
+}
+.formular button { margin-top: 14px; width: 100%; }
+
+/* Fuß */
+.fuss {
+  border-top: 1px solid var(--linie); margin-top: 24px;
+  padding: 24px 16px 40px; text-align: center; color: var(--grau);
+}
+.fuss a { color: var(--akzent-dunkel); }
+
+@media (min-width: 720px) {
+  .nav { display: flex; }
+  .kopf-cta { display: inline-flex; }
+  .nav-schalter { display: none; }
+  .held h1 { font-size: 3rem; }
+  .karten { grid-template-columns: 1fr 1fr 1fr; }
+  .kontakt-raster { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── Klickda-Ergänzungen (Produkt-Showcase) ─────────────────────────── */
+.icon-marke { width: 1.3em; height: 1.3em; color: var(--akzent); margin-right: .4em; }
+.held-ueberzeile { margin: 0 0 .6rem; color: var(--akzent-dunkel); font-weight: 600; letter-spacing: .02em; text-transform: uppercase; font-size: .85rem; }
+.held h1 { text-wrap: balance; }
+.abschnitt-hell { background: var(--weich); border-radius: 16px; }
+.bild { margin: 0 0 2rem; }
+.bild img { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid var(--linie); box-shadow: 0 12px 40px rgb(0 0 0 / .10); }
+.bild figcaption { color: var(--grau); font-size: .95rem; margin-top: .6rem; text-wrap: pretty; }
+.stufen { display: grid; gap: 16px; }
+.stufe { position: relative; padding-top: 2.6rem; }
+.stufe-nr { position: absolute; top: 14px; left: 18px; width: 2rem; height: 2rem; border-radius: 50%; background: var(--akzent); color: #fff; display: grid; place-items: center; font-weight: 700; }
+.karten-sechs { grid-template-columns: 1fr; }
+.ablauf { counter-reset: schritt; list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; max-width: 760px; }
+.ablauf li { counter-increment: schritt; position: relative; padding: 14px 16px 14px 3.4rem; background: var(--karte); border: 1px solid var(--linie); border-radius: 12px; }
+.ablauf li::before { content: counter(schritt); position: absolute; left: 14px; top: 12px; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--weich); color: var(--akzent-dunkel); display: grid; place-items: center; font-weight: 700; }
+.konnektoren { display: grid; gap: 16px; }
+.konnektor { padding: 18px 20px; border-left: 4px solid var(--akzent); background: var(--karte); border-radius: 0 12px 12px 0; }
+.konnektor h3 { margin: 0 0 .4rem; font-size: 1.05rem; }
+.konnektor p { margin: 0; color: var(--grau); }
+@media (min-width: 720px) {
+  .stufen { grid-template-columns: repeat(3, 1fr); }
+  .karten-sechs { grid-template-columns: repeat(3, 1fr); }
+  .konnektoren { grid-template-columns: repeat(3, 1fr); }
+}

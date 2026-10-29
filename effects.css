@@ -1,0 +1,61 @@
+/* Rawkeep Design-Kit — Basis-Styles zu effects.js + Hintergrund-Muster.
+   Alles über CSS-Variablen themebar; kein externes Asset, kein CDN.
+
+   Muster-Klassen erwarten zwei Variablen im :root des Projekts:
+     --kit-akzent   (Musterfarbe, z. B. Markenfarbe)
+     --kit-flaeche  (Hintergrund-Grundton) */
+
+/* ── Scroll-Reveal ─────────────────────────────────────────────────── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+[data-reveal].sichtbar { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+}
+
+/* ── Hover-Lift für Karten ─────────────────────────────────────────── */
+.lift { transition: transform .25s ease, box-shadow .25s ease; }
+.lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .10);
+}
+@media (prefers-reduced-motion: reduce) { .lift, .lift:hover { transform: none; } }
+
+/* ── Navigation schrumpft beim Scrollen (data-nav-shrink) ──────────── */
+[data-nav-shrink] { transition: padding .25s ease, box-shadow .25s ease; }
+[data-nav-shrink].geschrumpft { box-shadow: 0 2px 14px rgba(0, 0, 0, .08); }
+
+/* ── Hintergrund-Muster (reine CSS-Gradients — 0 Bytes Bilddaten) ──── */
+.bg-verlauf {
+  background: linear-gradient(160deg,
+    var(--kit-flaeche, #faf7f2) 0%,
+    color-mix(in srgb, var(--kit-akzent, #888) 12%, var(--kit-flaeche, #faf7f2)) 55%,
+    var(--kit-flaeche, #faf7f2) 100%);
+}
+.bg-punkte {
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--kit-akzent, #888) 22%, transparent) 1.5px, transparent 1.5px);
+  background-size: 26px 26px;
+}
+.bg-wellen {
+  background-image: repeating-linear-gradient(-35deg,
+    color-mix(in srgb, var(--kit-akzent, #888) 8%, transparent) 0 2px,
+    transparent 2px 18px);
+}
+.bg-glow {
+  background:
+    radial-gradient(60% 50% at 50% 0%,
+      color-mix(in srgb, var(--kit-akzent, #888) 18%, transparent), transparent 70%),
+    var(--kit-flaeche, #faf7f2);
+}
+
+/* ── Parallax-Bühne: Ebenen sauber beschneiden ─────────────────────── */
+.parallax-buehne { position: relative; overflow: hidden; }
+.parallax-buehne > [data-parallax] {
+  position: absolute; inset: -20% 0; z-index: 0; pointer-events: none;
+  will-change: transform;
+}
+.parallax-buehne > .inhalt { position: relative; z-index: 1; }

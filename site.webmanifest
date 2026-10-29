@@ -1,0 +1,10 @@
+{
+  "name": "Klickda",
+  "short_name": "Klickda",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#f5f7fa",
+  "theme_color": "#3949ab",
+  "lang": "de",
+  "icons": [{ "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
