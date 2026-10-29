@@ -36,6 +36,7 @@
       <a href="#sicherheit">Sicherheit</a>
       <a href="#automatisierung">Automatisierung</a>
       <a href="#wege">Kein Lock-in</a>
+      <a href="#stand">Stand</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
     <a class="knopf knopf-primaer kopf-cta" href="#kontakt">Pilot anfragen</a>
@@ -59,6 +60,7 @@
       <p class="held-neben"><a href="#produkt">Oder erst ansehen, wie ein Klick aussieht ↓</a></p>
       <ul class="vertrauen" aria-label="Das zeichnet Klickda aus">
         <li>Läuft lokal auf dem Arbeitsplatz — keine Cloud, keine fremden Server, 0 externe Requests</li>
+        <li>Drei Konnektoren heute: SAP OData V2, Business Central, Dataverse — ein Kern, ein Paket je Kunde</li>
         <li>Jeder Schreibvorgang ist ein benanntes Kommando: Vorbedingung, ETag, Protokoll, Rückgängig</li>
         <li>Übergabe-Paket inklusive — Sie dürfen jederzeit gehen und alles mitnehmen</li>
       </ul>
@@ -70,7 +72,7 @@
     <p class="abschnitt-intro" data-reveal>Eine gesperrte Lieferung, ein Knopf „Sperre aufheben", ein Protokolleintrag — und ein „Rückgängig", das die alte Sperre wieder setzt. Keine Nachfrage, kein Formular.</p>
     <figure class="bild" data-reveal>
       <img src="klickda-cockpit.png" width="1280" height="860" alt="Klickda-Oberfläche: Liste gesperrter Lieferungen mit Mandant-Chip, Sichten, Suche und je Zeile dem Knopf „Sperre aufheben"; unten ein Hinweis „Lieferung 80000009: Liefersperre aufheben — erledigt" mit Rückgängig-Knopf." loading="lazy">
-      <figcaption>Echter Stand aus der automatischen Abnahme gegen ein nachgebautes SAP-Gateway: Mandant immer sichtbar, ein primärer Knopf je Zeile, Rückgängig statt Bestätigungsdialog.</figcaption>
+      <figcaption>Echter Stand aus der automatischen Abnahme gegen nachgebaute Gateways: Mandant immer sichtbar, Tagesbericht oben, ein primärer Knopf je Zeile, Rückgängig statt Bestätigungsdialog.</figcaption>
     </figure>
     <div class="stufen">
       <article class="karte lift stufe" data-reveal>
@@ -140,8 +142,19 @@
     <div class="konnektoren" data-reveal>
       <div class="konnektor"><h3>SAP S/4HANA, OData V2</h3><p>CSRF-Token und Sitzungs-Cookie aus dem Einzel-GET, ETag als If-Match, Folgeseiten sauber über den Proxy. Gegen ein nachgebautes Gateway mit genau diesen Kanten getestet.</p></div>
       <div class="konnektor"><h3>Dynamics 365 Business Central, API v2.0</h3><p>OAuth über Entra-App, Company-Auflösung, GUID-Schlüssel, If-Match als Pflicht. Eigener Fake, eigener Durchstich.</p></div>
-      <div class="konnektor"><h3>OData V4, generisch</h3><p>Die Basis für Dataverse und jedes weitere System, das OData spricht. Ein Vertrag, ein Adapter je System, nie ein Umbau des Kerns.</p></div>
+      <div class="konnektor"><h3>Dataverse, Dynamics 365 Sales</h3><p>Web API v9.2, Bearer-Token, GUID-Schlüssel, ETag als If-Match — nie ein Upsert durch die Hintertür. Eigener Fake, eigener Durchstich.</p></div>
+      <div class="konnektor"><h3>OData V4, generisch</h3><p>Die Basis der V4-Adapter und jedes weiteren Systems, das OData spricht. Ein Vertrag, ein Adapter je System, nie ein Umbau des Kerns.</p></div>
     </div>
+  </section>
+
+  <section class="abschnitt" id="stand">
+    <h2 data-reveal>Stand der Entwicklung</h2>
+    <p class="abschnitt-intro" data-reveal>Klickda wird offen gebaut: jede Version mit Tests gegen nachgebaute Gateways und einer Abnahme im echten Browser. Was hier steht, läuft.</p>
+    <dl class="stand" data-reveal>
+      <div><dt>0.2.0 · Oktober 2026</dt><dd>Dritter Konnektor Dataverse. Eingabemaske für Kommandos mit Werten. Tagesbericht: erledigt, wer, Regel-Läufe, offene Vorschläge und Konflikte. 60 Tests, Browser-Abnahme über drei Bereiche.</dd></div>
+      <div><dt>0.1.0 · Oktober 2026</dt><dd>Kern mit Kommandos, Spiegel, Outbox, hash-verkettetem Protokoll und Rückgängig. Konnektoren SAP OData V2 und Business Central. Workflow-Pakete je Kunde, Rollen, Regeln mit Freigabe, Übergabe-Paket.</dd></div>
+      <div><dt>Als Nächstes</dt><dd>Lizenzschlüssel, Delta-Lesen für große Bestände, ein Assistent, der Konflikte erklärt und Regeln vorschlägt — und nur vorschlägt. Offen gegen die echte Sandbox: der Statuscode von Business Central bei fremdem ETag.</dd></div>
+    </dl>
   </section>
 
   <section class="abschnitt abschnitt-hell" id="ueber">
