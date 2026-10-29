@@ -60,7 +60,7 @@
       <p class="held-neben"><a href="#produkt">Oder erst ansehen, wie ein Klick aussieht ↓</a></p>
       <ul class="vertrauen" aria-label="Das zeichnet Klickda aus">
         <li>Läuft lokal auf dem Arbeitsplatz — keine Cloud, keine fremden Server, 0 externe Requests</li>
-        <li>Drei Konnektoren heute: SAP OData V2, Business Central, Dataverse — ein Kern, ein Paket je Kunde</li>
+        <li>Drei Konnektoren heute: SAP OData V2, Business Central, Dataverse — ein Kern, ein Paket je Kunde, mehrere Benutzer je Installation</li>
         <li>Jeder Schreibvorgang ist ein benanntes Kommando: Vorbedingung, ETag, Protokoll, Rückgängig</li>
         <li>Übergabe-Paket inklusive — Sie dürfen jederzeit gehen und alles mitnehmen</li>
       </ul>
@@ -114,6 +114,8 @@
       <li><strong>Vorschlag</strong> — die Regel schreibt nichts. Sie legt Vorschläge an, jeder mit dem Grund, warum er dasteht.</li>
       <li><strong>Freigabe</strong> — einzeln oder alle auf einmal, mit Ihrer Rolle und Ihrem Namen im Protokoll. Erst dann wird es ein Kommando.</li>
       <li><strong>Ausführen ohne Klick</strong> — wenn Sie es wollen: nur mit Verwaltungsrolle, mit Obergrenze je Lauf, und jede Ausführung bleibt rückgängig machbar.</li>
+      <li><strong>Ein Klick, mehrere Dinge</strong> — ein Ablauf reiht mehrere Kommandos aneinander, auch über Systeme hinweg: Sperre weg, Limit neu, Kunde entsperrt. Jeder Schritt wird geprüft, hält einer, wird das Erledigte zurückgenommen.</li>
+      <li><strong>Bestehenden Prozess lesen</strong> — ein Prozessmodell aus BPMN, n8n oder Power Automate hinein, und Klickda sagt, welche Schritte ein Knopf, eine Regel oder ein Ablauf werden, was offen bleibt, und zählt im Probelauf, was es heute träfe. Das Paket wird geschrieben, aktiviert wird es von Ihnen.</li>
       <li><strong>Assistent</strong> — erklärt einen Konflikt in Worten, findet im Protokoll wiederholte Klicks und schreibt daraus Regel-Entwürfe. Ein lokales Sprachmodell darf dazukommen und höchstens einen Vorschlag machen. Es entscheidet nichts.</li>
     </ol>
   </section>
@@ -152,11 +154,12 @@
     <h2 data-reveal>Stand der Entwicklung</h2>
     <p class="abschnitt-intro" data-reveal>Klickda wird offen gebaut: jede Version mit Tests gegen nachgebaute Gateways und einer Abnahme im echten Browser. Was hier steht, läuft.</p>
     <dl class="stand" data-reveal>
+      <div><dt>0.5.0 · Oktober 2026</dt><dd>Abläufe: ein Klick, mehrere Kommandos, auch über Systeme hinweg — jeder Schritt geprüft, Rückgängig in umgekehrter Reihenfolge. Mehrere Benutzer je Installation mit Anmeldung und Rolle je Person. Prozess lesen: ein bestehendes Prozessmodell einlesen, Vorschläge und Entwurf erhalten, Probelauf gegen die eigenen Daten, Paket schreiben — in einem Schritt. 89 Tests.</dd></div>
       <div><dt>0.4.0 · Oktober 2026</dt><dd>Assistent: erklärt Konflikte aus vorher und jetzt, findet im Protokoll wiederholte Klicks und schreibt daraus Regel-Entwürfe fürs Paket — ohne Sprachmodell. Freie Fragen an ein lokales Modell über Ollama, höchstens ein geprüfter Vorschlag je Antwort, ausgeführt nur durch Klick. 76 Tests.</dd></div>
       <div><dt>0.3.0 · Oktober 2026</dt><dd>Lizenzschlüssel nach dem Verfahren des Werks, mit Mandant und Ablauf — und der Regel, dass eine Lizenz nur den Rückweg stoppt, nie Lesen, Protokoll oder Übergabe. Delta-Lesen für Business Central und Dataverse: nur, was sich seit dem letzten Lauf geändert hat. 69 Tests.</dd></div>
       <div><dt>0.2.0 · Oktober 2026</dt><dd>Dritter Konnektor Dataverse. Eingabemaske für Kommandos mit Werten. Tagesbericht: erledigt, wer, Regel-Läufe, offene Vorschläge und Konflikte. 60 Tests, Browser-Abnahme über drei Bereiche.</dd></div>
       <div><dt>0.1.0 · Oktober 2026</dt><dd>Kern mit Kommandos, Spiegel, Outbox, hash-verkettetem Protokoll und Rückgängig. Konnektoren SAP OData V2 und Business Central. Workflow-Pakete je Kunde, Rollen, Regeln mit Freigabe, Übergabe-Paket.</dd></div>
-      <div><dt>Als Nächstes</dt><dd>Mehrere Benutzer je Installation. Erster Pilot mit eigenem Workflow-Paket. Offen gegen die echte Sandbox: der Statuscode von Business Central bei fremdem ETag.</dd></div>
+      <div><dt>Als Nächstes</dt><dd>Erster Pilot mit eigenem Workflow-Paket. SSO für die Anmeldung. Offen gegen die echte Sandbox: der Statuscode von Business Central bei fremdem ETag.</dd></div>
     </dl>
   </section>
 
