@@ -207,3 +207,14 @@ address { font-style: normal; margin: 12px 0; }
 .stand > div { background: var(--karte); border: 1px solid var(--linie); border-radius: 12px; padding: 14px 18px; }
 .stand dt { font-weight: 700; color: var(--akzent-dunkel); margin-bottom: 4px; }
 .stand dd { margin: 0; color: var(--grau); text-wrap: pretty; }
+
+/* Szenarien: Zahlenleiste und Rechner */
+.zahlen { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); max-width: none; }
+.zahlen dt { font-size: 2rem; line-height: 1.1; }
+.zahlen dd { font-size: .92rem; }
+.rechner { margin-top: 20px; }
+.rechner-felder { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.rechner-felder label { display: flex; flex-direction: column; gap: 4px; font-weight: 600; }
+.rechner-aus { margin-top: 14px; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); max-width: none; }
+.rechner-aus dt { font-size: 1.5rem; }
+@media (min-width: 700px) { .rechner-felder { grid-template-columns: repeat(3, 1fr); } }
