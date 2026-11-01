@@ -149,6 +149,43 @@
     </form>
   </section>
 
+  <section class="abschnitt abschnitt-hell" id="belegdurchlauf">
+    <h2 data-reveal>4 · Der Auftrag auf dem Weg durchs Haus</h2>
+    <p class="abschnitt-intro" data-reveal>Microsoft Dynamics 365 Business Central · Kundenaufträge, Anlieferung, Retouren</p>
+    <p data-reveal>Ein Kunde bestellt, ein Lieferant liefert an, ein anderer schickt zurück. Jeder Beleg wandert durch Vertrieb, Disposition, Freigabe, Lager, Versand und Buchhaltung — und in jeder Abteilung heißt das: Beleg suchen, öffnen, Status prüfen, Feld setzen, freigeben, buchen. Fünf Abteilungen, fünf Listen, und keine sagt, was heute dran ist.</p>
+    <dl class="stand zahlen" data-reveal>
+      <div><dt><span data-szenario="belegdurchlauf" data-zahl="freizugeben">24</span></dt><dd>Aufträge mit Termin, seit Tagen offen — nicht freigegeben</dd></div>
+      <div><dt><span data-szenario="belegdurchlauf" data-zahl="ohneTermin">17</span></dt><dd>Aufträge ohne Liefertermin (Disposition)</dd></div>
+      <div><dt><span data-szenario="belegdurchlauf" data-zahl="versandHeute">31</span></dt><dd>freigegeben und heute zu liefern (Versand)</dd></div>
+      <div><dt><span data-szenario="belegdurchlauf" data-zahl="wareneingang">17</span></dt><dd>Bestellungen bis heute erwartet (Wareneingang)</dd></div>
+      <div><dt><span data-szenario="belegdurchlauf" data-zahl="ueberfaellig">5</span></dt><dd>davon überfällig — der Lieferant hat verschoben</dd></div>
+      <div><dt><span data-szenario="belegdurchlauf" data-zahl="retourenEntwurf">6</span></dt><dd>Gutschriften zur Retoure im Entwurf (Buchhaltung)</dd></div>
+    </dl>
+    <figure class="bild" data-reveal>
+      <img src="szenario-belegdurchlauf.png" width="1280" height="800" alt="Klickda, Bereich Kundenaufträge, Sicht „Versand: heute fällig": 31 freigegebene Aufträge mit Spalten Auftrag, Kunde, Bestellt, Liefertermin, Betrag, Status, Geliefert; je Zeile der dunkle Knopf „Liefern + Rechnung" und „Zurück an Vertrieb"; oben die Bereiche Kundenaufträge, Anlieferung, Retouren." loading="lazy">
+      <figcaption>Die Versand-Sicht aus der Demo — „Liefern + Rechnung" ist dunkel: eine Buchung, die Oberfläche fragt einmal, danach gibt es kein Rückgängig.</figcaption>
+    </figure>
+    <div class="karten">
+      <article class="karte" data-reveal><h3>Heute</h3><p>Je Abteilung die eigene Liste: Belegkarte öffnen, Reiter, Feld, Status, Freigabe — und bei einer Terminverschiebung drei Masken: wieder öffnen, Datum, freigeben. Buchungen am Ende des Tages, wenn jemand dazu kommt. Was liegen bleibt, merkt der Kunde.</p></article>
+      <article class="karte" data-reveal data-delay="1"><h3>Mit Klickda</h3><p>Jede Abteilung bekommt ihre Sicht. Disposition: „Termin + Freigabe …" in einem Klick. Versand: „Liefern + Rechnung" als Buchung — die Oberfläche fragt einmal, dann ist es gebucht, kein Rückgängig, der Beleg verschwindet aus der Liste wie in BC. Wareneingang: „Termin verschieben …" erledigt drei Masken als einen Ablauf. Buchhaltung bucht die Gutschrift. Die Regel schlägt die alten offenen Aufträge zur Freigabe vor.</p></article>
+    </div>
+    <form class="formular rechner" data-rechner="belegdurchlauf" data-vorgaenge="95" data-minuten="2" data-klicks="72" data-reveal>
+      <h3>Was der Status quo kostet — mit Ihren Zahlen</h3>
+      <div class="rechner-felder">
+        <label>Vorgänge je Tag, alle Abteilungen<input name="vorgaenge" type="number" min="0" value="95"></label>
+        <label>Minuten je Vorgang in der Belegkarte<input name="minuten" type="number" min="0" step="0.5" value="2"></label>
+        <label>Stundensatz in €<input name="stundensatz" type="number" min="0" value="65"></label>
+      </div>
+      <dl class="stand rechner-aus">
+        <div><dt data-aus="statusQuoMin">190 min</dt><dd>je Tag in Belegkarten heute, übers Haus</dd></div>
+        <div><dt data-aus="klickdaMin">18 min</dt><dd>je Tag mit Klickda (ein Klick je Beleg, eine Freigabe für alle alten)</dd></div>
+        <div><dt data-aus="stundenJahr">717 h</dt><dd>gewonnen im Jahr</dd></div>
+        <div><dt data-aus="euroJahr">46.583 €</dt><dd>im Jahr — über fünf Abteilungen</dd></div>
+      </dl>
+      <p class="hinweis-klein">Annahmen, nicht Messungen: zwei Minuten je Belegkarte, 250 Arbeitstage. Der Rechner rechnet lokal, sendet nichts.</p>
+    </form>
+  </section>
+
   <section class="abschnitt abschnitt-hell" id="naechster-schritt">
     <h2 data-reveal>Ihre Lage ist eine vierte</h2>
     <p data-reveal>Jede dieser Lagen ist ein Workflow-Paket: eine Datei mit Bereich, Sichten, Kommandos, Regeln und Abläufen. Ihre Lage wird die nächste — im Pilot, mit einem Bereich, einer Sicht und einem Feld, in sechs Wochen. Was dabei entsteht, gehört Ihnen: das Übergabe-Paket enthält den Prozess, die Spezifikation mit Code und das Protokoll.</p>
